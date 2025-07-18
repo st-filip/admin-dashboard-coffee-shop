@@ -1,0 +1,48 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title has-text-centered">Admin Login</h1>
+    <div class="columns is-centered">
+      <div class="column is-4">
+        <form class="box" [formGroup]="form" (ngSubmit)="login()">
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input
+                class="input"
+                type="email"
+                placeholder="Enter email"
+                formControlName="email"
+              />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input
+                class="input"
+                type="password"
+                placeholder="Enter password"
+                formControlName="password"
+              />
+            </div>
+          </div>
+
+          <div *ngIf="error" class="notification is-danger">
+            {{ error }}
+          </div>
+
+          <div class="field is-grouped is-grouped-right mt-4">
+            <button
+              class="button is-primary is-fullwidth"
+              type="submit"
+              [disabled]="loading"
+            >
+              {{ loading ? "Logging in..." : "Login" }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

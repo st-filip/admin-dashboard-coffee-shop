@@ -1,0 +1,36 @@
+<section class="section">
+  <div class="container">
+    <h1 class="title">Coffee Shop Admin Dashboard</h1>
+
+    <nav class="tabs is-boxed is-small">
+      <div class="column is-flex is-align-items-center is-full">
+        <ul class="is-flex">
+          <li
+            routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a routerLink="/tabs/orders">Orders</a>
+          </li>
+          <li
+            routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a routerLink="/tabs/products">Products</a>
+          </li>
+          <li
+            routerLinkActive="is-active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <a routerLink="/tabs/users">Users</a>
+          </li>
+        </ul>
+        <ul class="is-flex is-justify-content-flex-end">
+          <li>
+            <a (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <router-outlet></router-outlet>
+  </div>
+</section>

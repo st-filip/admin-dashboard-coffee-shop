@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+@import "bulma/css/bulma.css";
+
+:root {
+  --bulma-primary-h: 25deg;
+  --bulma-primary-s: 60%;
+  --bulma-primary-l: 25%;
+
+  --bulma-link-h: 25deg;
+  --bulma-link-s: 55%;
+  --bulma-link-l: 50%;
+
+  --bulma-info-h: 40deg;
+  --bulma-info-s: 70%;
+  --bulma-info-l: 70%;
+
+  --bulma-success-h: 100deg;
+  --bulma-success-s: 30%;
+  --bulma-success-l: 40%;
+
+  --bulma-warning-h: 39deg;
+  --bulma-warning-s: 70%;
+  --bulma-warning-l: 50%;
+
+  --bulma-danger-h: 5deg;
+  --bulma-danger-s: 55%;
+  --bulma-danger-l: 35%;
+}
