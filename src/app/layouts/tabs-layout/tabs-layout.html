@@ -5,22 +5,13 @@
     <nav class="tabs is-boxed is-small">
       <div class="column is-flex is-align-items-center is-full">
         <ul class="is-flex">
-          <li
-            routerLinkActive="is-active"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
+          <li routerLinkActive="is-active">
             <a routerLink="/tabs/orders">Orders</a>
           </li>
-          <li
-            routerLinkActive="is-active"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
+          <li routerLinkActive="is-active">
             <a routerLink="/tabs/products">Products</a>
           </li>
-          <li
-            routerLinkActive="is-active"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
+          <li routerLinkActive="is-active">
             <a routerLink="/tabs/users">Users</a>
           </li>
         </ul>
@@ -31,6 +22,12 @@
         </ul>
       </div>
     </nav>
+    @if (loading) {
+    <div class="has-text-centered mt-6">
+      <progress class="progress is-small is-info" max="100"></progress>
+      <p class="mt-2 mb-4">Logging out...</p>
+    </div>
+    }
     <router-outlet></router-outlet>
   </div>
 </section>

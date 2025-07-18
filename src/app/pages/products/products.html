@@ -1,3 +1,37 @@
 <div class="box">
   <h2 class="subtitle">Products</h2>
+  @if (products.length === 0) {
+  <div class="has-text-centered mt-6">
+    <progress class="progress is-small is-info" max="100"></progress>
+    <p class="mt-2">Loading products...</p>
+  </div>
+  } @else {
+  <table class="table is-striped is-fullwidth">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (product of products; track product.id) {
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.stock }}</td>
+        <td>
+          <button
+            class="button is-small is-info has-text-info-dark"
+            (click)="viewDetails(product)"
+          >
+            Edit
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  }
 </div>

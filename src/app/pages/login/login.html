@@ -28,17 +28,20 @@
             </div>
           </div>
 
-          <div *ngIf="error" class="notification is-danger">
+          @if (error) {
+          <div class="notification is-danger">
             {{ error }}
           </div>
+          }
 
           <div class="field is-grouped is-grouped-right mt-4">
             <button
-              class="button is-primary is-fullwidth"
+              class="button is-primary is-fullwidth has-text-primary-light"
               type="submit"
               [disabled]="loading"
+              [class.is-loading]="loading"
             >
-              {{ loading ? "Logging in..." : "Login" }}
+              Login
             </button>
           </div>
         </form>

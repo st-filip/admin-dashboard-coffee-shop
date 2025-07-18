@@ -5,6 +5,7 @@ import { Users } from './pages/users/users';
 import { Login } from './pages/login/login';
 import { TabsLayout } from './layouts/tabs-layout/tabs-layout';
 import { authGuard } from './auth/auth-guard';
+import { ProductDetails } from './pages/products/product-details/product-details';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'orders', pathMatch: 'full' },
       { path: 'orders', component: Orders },
       { path: 'products', component: Products },
+      { path: 'products/:id', component: ProductDetails },
       { path: 'users', component: Users },
     ],
     canActivate: [authGuard],

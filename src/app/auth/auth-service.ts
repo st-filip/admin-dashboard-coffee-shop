@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { of } from 'rxjs';
+import { environment } from '../../environments/environment.development';
 
 interface LoginResponse {
   accessToken: string;
@@ -13,13 +13,14 @@ interface LoginResponse {
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly API_URL = 'http://localhost:3000/api/auth';
-
-  constructor(private http: HttpClient, private router: Router) {}
+  private http = inject(HttpClient);
 
   login(email: string, password: string) {
     return this.http
-      .post<LoginResponse>(`${this.API_URL}/login`, { email, password })
+      .post<LoginResponse>(`${environment.API_URL}/auth/login`, {
+        email,
+        password,
+      })
       .pipe(
         tap((res) => {
           localStorage.setItem('accessToken', res.accessToken);
@@ -29,12 +30,7 @@ export class AuthService {
   }
 
   logout() {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + localStorage.getItem('accessToken')!,
-    });
-
-    return this.http.post<any>(`${this.API_URL}/logout`, {}, { headers });
+    return this.http.post<any>(`${environment.API_URL}/auth/logout`, {});
   }
 
   getToken(): string | null {
@@ -74,7 +70,7 @@ export class AuthService {
   refresh(refreshToken: string) {
     if (refreshToken) {
       return this.http.post<{ accessToken: string; refreshToken: string }>(
-        `${this.API_URL}/refresh`,
+        `${environment.API_URL}/auth/refresh`,
         { refreshToken }
       );
     } else {

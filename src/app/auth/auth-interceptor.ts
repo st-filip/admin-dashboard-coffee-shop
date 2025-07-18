@@ -2,7 +2,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth-service';
-import { from, switchMap, throwError } from 'rxjs';
+import { catchError, from, switchMap, throwError } from 'rxjs';
 
 function isTokenExpired(token: string): boolean {
   try {
@@ -27,9 +27,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const accessToken = localStorage.getItem('accessToken');
   const refreshToken = localStorage.getItem('refreshToken');
 
-  console.log(accessToken);
-  console.log(refreshToken);
-
   if (accessToken && !isTokenExpired(accessToken)) {
     req = req.clone({
       setHeaders: {
@@ -42,7 +39,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   if (refreshToken && !isTokenExpired(refreshToken)) {
     return from(authService.refresh(refreshToken)).pipe(
       switchMap((newTokens) => {
-        console.log(newTokens);
         if (
           newTokens == null ||
           !newTokens.accessToken ||
@@ -63,6 +59,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         });
 
         return next(clonedReq);
+      }),
+      catchError((err) => {
+        authService.logout();
+        router.navigate(['/login']);
+        return throwError(() => err);
       })
     );
   }
